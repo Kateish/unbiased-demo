@@ -12,9 +12,6 @@ public class SearchAdviserPage {
     String postCode = "SE207AA";
     String targetAdviser = "The Private Office";
 
-    public SearchAdviserPage() {
-    }
-
     public void openPage() {
         Selenide.open("https://www.unbiased.co.uk");
         Selenide.$(By.linkText("Ok, thanks")).click();
