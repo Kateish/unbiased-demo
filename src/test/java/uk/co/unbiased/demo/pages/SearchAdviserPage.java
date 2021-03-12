@@ -1,9 +1,10 @@
 package uk.co.unbiased.demo.pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selectors;
-import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 
 public class SearchAdviserPage {
     String adviser = "Financial adviser";
@@ -13,23 +14,23 @@ public class SearchAdviserPage {
     String targetAdviser = "The Private Office";
 
     public void openPage() {
-        Selenide.open("https://www.unbiased.co.uk");
-        Selenide.$(By.linkText("Ok, thanks")).click();
+        open("https://www.unbiased.co.uk");
+        $(By.linkText("Ok, thanks")).click();
     }
 
     public SearchAdviserPage fillSearchData() {
-        Selenide.$(By.cssSelector(".financial")).click();
-        Selenide.$(By.linkText("Show me a list")).click();
-        Selenide.$(Selectors.byText(this.adviser)).click();
-        Selenide.$(Selectors.byText(this.adviceOn)).click();
-        Selenide.$(Selectors.byText(this.income)).click();
-        Selenide.$(By.id("input-60")).setValue(this.postCode).submit();
-        Selenide.$(Selectors.byText("Find advisers")).click();
+        $(By.cssSelector(".financial")).click();
+        $(By.linkText("Show me a list")).click();
+        $(byText(this.adviser)).click();
+        $(byText(this.adviceOn)).click();
+        $(byText(this.income)).click();
+        $(By.id("input-60")).setValue(this.postCode).submit();
+        $(byText("Find advisers")).click();
         return this;
     }
 
     public void checkSearchResults() {
-        Selenide.$$(By.xpath("//*[@class='row flex-nowrap no-gutters']")).filterBy(Condition.text(this.targetAdviser)).shouldHaveSize(0);
-        Selenide.$$(By.xpath("//*[@class='row flex-nowrap no-gutters']")).shouldHaveSize(20);
+        $$(By.xpath("//*[@class='row flex-nowrap no-gutters']")).filterBy(Condition.text(this.targetAdviser)).shouldHaveSize(0);
+        $$(By.xpath("//*[@class='row flex-nowrap no-gutters']")).shouldHaveSize(20);
     }
 }
